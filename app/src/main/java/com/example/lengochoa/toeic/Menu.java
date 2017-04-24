@@ -5,19 +5,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
+import java.util.ArrayList;
 
 public class Menu extends AppCompatActivity {
 
     private String[] answerSheet;
+    private String[] ansKey;
+    private String[] audios;
+    private int indexTest;
+    private ArrayList<Question> questions;
+    private EditText txtPoint;
+    private int point;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        answerSheet = new String[100];
-        for(int i =0;i<100;i++){
-            answerSheet[i] = "B";
+        final Bundle bundle= getIntent().getExtras();
+        questions = (ArrayList<Question>)bundle.getSerializable("questions");
+
+        Intent intent = getIntent();
+        answerSheet = intent.getStringArrayExtra("answerSheet");
+        audios = intent.getStringArrayExtra("audios");
+        indexTest = intent.getIntExtra("indexTest",1);
+        ansKey = new String[101];
+        int i = 0;
+        for(Question q : questions){
+            ansKey[i] = q.getKey();
+            i++;
         }
+        point = 0;
+        for(int j  = 0 ; j < 100 ; j++){
+            if(answerSheet[j].equals(ansKey[j])) point++;
+        }
+
+        txtPoint = (EditText)findViewById(R.id.txtPoint);
+        txtPoint.setText("Bạn đúng " + point + " câu/100");
 
         final Button btnPart1 = (Button)findViewById(R.id.btnPart1);
         btnPart1.setOnClickListener(new View.OnClickListener() {
@@ -25,6 +50,11 @@ public class Menu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent AnswerPart1 = new Intent(Menu.this,AnswerPart1.class);
                 AnswerPart1.putExtra("answerSheet",answerSheet);
+                AnswerPart1.putExtra("ansKey",ansKey);
+                AnswerPart1.putExtra("audios",audios);
+                AnswerPart1.putExtra("indexTest",indexTest);
+                bundle.putSerializable("questions",questions);
+                AnswerPart1.putExtras(bundle);
                 startActivity(AnswerPart1);
             }
         });

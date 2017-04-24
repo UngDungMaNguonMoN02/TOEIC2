@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class DirectionPart2 extends AppCompatActivity {
 
     private long remainingTime;
@@ -15,6 +17,7 @@ public class DirectionPart2 extends AppCompatActivity {
     private String[] answerSheet;
     private String[] audios;
     private int indexTest;
+    private ArrayList<Question> questions;
 
     private String ConvertTime(int s){
         int m = s/60;
@@ -34,6 +37,8 @@ public class DirectionPart2 extends AppCompatActivity {
         remainingTime = intent.getLongExtra("remainingTime",1L);
         audios = intent.getStringArrayExtra("audios");
         indexTest = intent.getIntExtra("indexTest",1);
+        Bundle bundle = getIntent().getExtras();
+        questions = (ArrayList<Question>) bundle.getSerializable("questions");
 
         CounterForTest timer = new CounterForTest(remainingTime,1000);
         timer.start();
@@ -78,6 +83,9 @@ public class DirectionPart2 extends AppCompatActivity {
             part2.putExtra("answerSheet",answerSheet);
             part2.putExtra("audios",audios);
             part2.putExtra("indexTest",indexTest);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("questions",questions);
+            part2.putExtras(bundle);
             startActivity(part2);
         }
     }

@@ -7,8 +7,11 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class Part2 extends AppCompatActivity {
 
@@ -22,6 +25,8 @@ public class Part2 extends AppCompatActivity {
     private int duration;
     private String audios[];
     private int indexTest;
+    private ArrayList<Question> questions;
+    private Button nextPart;
 
     private String ConvertTime(int s){
         int m = s/60;
@@ -39,6 +44,9 @@ public class Part2 extends AppCompatActivity {
         remainingTime = intent.getLongExtra("remainingTime",1L);
         audios = intent.getStringArrayExtra("audios");
         indexTest = intent.getIntExtra("indexTest",1);
+        Bundle bundle = getIntent().getExtras();
+        questions = (ArrayList<Question>) bundle.getSerializable("questions");
+
         txtTimer = (TextView)findViewById(R.id.txtTimer);
         txtQuestion = (TextView)findViewById(R.id.txtquestion);
         RadioButton a = (RadioButton)findViewById(R.id.rdba);
@@ -65,14 +73,36 @@ public class Part2 extends AppCompatActivity {
                 answerSheet[currentIndex] = tempAns;
             }
         });
+        currentIndex = 10;
+        playAudio(currentIndex);
 
-        playAudio(10);
-
-        CounterForTest timer = new CounterForTest(remainingTime,1000);
+        final CounterForTest timer = new CounterForTest(2473000,1000);
         timer.start();
 
-        Counter nextQuestion = new Counter(593000,1000);
+        final Counter nextQuestion = new Counter(593000,1000);
         nextQuestion.start();
+
+        nextPart = (Button)findViewById(R.id.btnNextPart);
+        nextPart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.cancel();
+                nextQuestion.cancel();
+                mediaPlayerPart2.release();
+                for(int i = 10; i < 40; i++){
+                    answerSheet[i]="B";
+                }
+                Intent part3 = new Intent(Part2.this,Part3.class);
+                part3.putExtra("answerSheet",answerSheet);
+                part3.putExtra("remainingTime",remainingTime);
+                part3.putExtra("audios",audios);
+                part3.putExtra("indexTest",indexTest);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("questions",questions);
+                part3.putExtras(bundle);
+                startActivity(part3);
+            }
+        });
     }
 
     public class CounterForTest extends CountDownTimer{
@@ -117,12 +147,15 @@ public class Part2 extends AppCompatActivity {
         public void onFinish() {
             answerSheet[currentIndex]=tempAns;
             mediaPlayerPart2.release();
-            Intent part3 = new Intent(Part2.this,DirectionPart3.class);
-            part3.putExtra("answerSheet",answerSheet);
-            part3.putExtra("remainingTime",remainingTime);
-            part3.putExtra("audios",audios);
-            part3.putExtra("indexTest",indexTest);
-            startActivity(part3);
+            Intent direction_part3 = new Intent(Part2.this,DirectionPart3.class);
+            direction_part3.putExtra("answerSheet",answerSheet);
+            direction_part3.putExtra("remainingTime",remainingTime);
+            direction_part3.putExtra("audios",audios);
+            direction_part3.putExtra("indexTest",indexTest);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("questions",questions);
+            direction_part3.putExtras(bundle);
+            startActivity(direction_part3);
         }
     }
 

@@ -8,8 +8,11 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class Part4 extends AppCompatActivity {
 
@@ -18,52 +21,16 @@ public class Part4 extends AppCompatActivity {
     private long remainingTime;
     private String[] answerSheet;
     private MediaPlayer mediaPlayerPart4;
-    private int duration=0;
+    private int duration;
     private int timeToNext=0;
-    private int currentIndex=70;
+    private int currentIndex;
     private String tempAns1="";
     private String tempAns2="";
     private String tempAns3="";
     private String[] audios;
     private int indexTest;
-    private Question[] questions;
-
-    private void InitQuestion(){
-        questions = new Question[30];
-        for(int i = 0;i<30;i++){
-            questions[i] = new Question();
-        }
-        String[] content = new String[30];
-        String[] ans = new String[120];
-
-        content[0] = "Where are the speakers going?";
-        ans[0] = "To the parade";
-        ans[1] = "To a doctor's appointment";
-        ans[2] = "To a conference";
-        ans[3] = "To the university";
-
-        content[1] = "What are the speakers discussing?";
-        ans[4] = "How to get to the conference";
-        ans[5] = "How will drive to the conference";
-        ans[6] = "The theme of the parade";
-        ans[7] = "Where their office is located";
-
-        content[2] = "What does the men suggest?";
-        ans[8] = "Drive there";
-        ans[9] = "Take the bus";
-        ans[10] = "Take the subway";
-        ans[11] = "Take a taxi";
-
-        for(int i = 0; i < 30 ; i++)
-        {
-            String[] temp = new String[4];
-            temp[0] = ans[i * 4];
-            temp[1] = ans[i * 4 + 1];
-            temp[2] = ans[i * 4 + 2];
-            temp[3] = ans[i * 4 + 3];
-            questions[i].setQuestion(content[i],temp);
-        }
-    }
+    private ArrayList<Question> questions;
+    private Button nextPart;
 
     private String ConvertTime(int s){
         int m = s/60;
@@ -75,7 +42,6 @@ public class Part4 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part3);
-        InitQuestion();
 
         a1=(RadioButton)findViewById(R.id.rdba1);
         a1.setOnClickListener(new View.OnClickListener() {
@@ -181,28 +147,45 @@ public class Part4 extends AppCompatActivity {
         txtQ3 = (TextView)findViewById(R.id.txtquestion3);
         txtTimer = (TextView)findViewById(R.id.txtTimer);
 
-//        Intent intent = getIntent();
-//        remainingTime = intent.getLongExtra("remaingTime",1L);
-//        answerSheet = intent.getStringArrayExtra("answerSheet");
-//        audios = intent.getStringArrayExtra("audios");
-//        indexTest = intent.getIntExtra("indexTest",1);
+        Intent intent = getIntent();
+        remainingTime = intent.getLongExtra("remaingTime",1L);
+        answerSheet = intent.getStringArrayExtra("answerSheet");
+        audios = intent.getStringArrayExtra("audios");
+        indexTest = intent.getIntExtra("indexTest",1);
+        Bundle bundle = getIntent().getExtras();
+        questions = (ArrayList<Question>)bundle.getSerializable("questions");
 
-
-//        AssetManager assetManager = getAssets();
-//        try{
-//            audios = assetManager.list("audio" + indexTest);
-//        } catch (Exception ex){ex.printStackTrace();}
-
-
-//        CounterForTest timer = new CounterForTest(remainingTime,1000);
-        CounterForTest timer = new CounterForTest(5000,1000);
+        final CounterForTest timer = new CounterForTest(1232000,1000);
         timer.start();
 
-//        displayQuestion(currentIndex);
-//        playAudio(currentIndex);
-//
-//        Counter nextQuestion = new Counter(648000,1000);
-//        nextQuestion.start();
+        currentIndex = 70;
+        timeToNext = 0;
+        displayQuestion(currentIndex);
+        playAudio(currentIndex);
+
+        final Counter nextQuestion = new Counter(648000,1000);
+        nextQuestion.start();
+
+        nextPart = (Button)findViewById(R.id.btnNextPart);
+        nextPart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timer.cancel();
+                nextQuestion.cancel();
+                mediaPlayerPart4.release();
+                for(int i = 70 ; i < 100 ; i++){
+                    answerSheet[i]="D";
+                }
+                Intent menu = new Intent(Part4.this,Menu.class);
+                menu.putExtra("answerSheet",answerSheet);
+                menu.putExtra("audios",audios);
+                menu.putExtra("indexTest",indexTest);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("questions",questions);
+                menu.putExtras(bundle);
+                startActivity(menu);
+            }
+        });
 
     }
     public class CounterForTest extends CountDownTimer {
@@ -219,7 +202,12 @@ public class Part4 extends AppCompatActivity {
 
         @Override
         public void onFinish() {
+            mediaPlayerPart4.release();
             Intent menu = new Intent(Part4.this,Menu.class);
+            menu.putExtra("answerSheet",answerSheet);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("questions",questions);
+            menu.putExtras(bundle);
             startActivity(menu);
         }
     }
@@ -232,7 +220,7 @@ public class Part4 extends AppCompatActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
-            if(timeToNext<=duration) timeToNext++;
+            if(timeToNext<=duration+1) timeToNext++;
             else {
                 try{
                     currentIndex+=3;
@@ -257,22 +245,22 @@ public class Part4 extends AppCompatActivity {
     }
 
     private void displayQuestion(int questionIndex){
-        txtQ1.setText((questionIndex+1) + ". " + questions[questionIndex-40].getContent());
-        String[] temp = questions[questionIndex-40].getAnswer();
+        txtQ1.setText((questionIndex+1) + ". " + questions.get(questionIndex).getContent());
+        String[] temp = questions.get(questionIndex).getAnswer();
         a1.setText(temp[0]);
         b1.setText(temp[1]);
         c1.setText(temp[2]);
         d1.setText(temp[3]);
 
-        txtQ2.setText((questionIndex+2) + ". " + questions[questionIndex-39].getContent());
-        temp = questions[questionIndex-39].getAnswer();
+        txtQ2.setText((questionIndex+2) + ". " + questions.get(questionIndex+1).getContent());
+        temp = questions.get(questionIndex+1).getAnswer();
         a2.setText(temp[0]);
         b2.setText(temp[1]);
         c2.setText(temp[2]);
         d2.setText(temp[3]);
 
-        txtQ3.setText((questionIndex+3) + ". " + questions[questionIndex-38].getContent());
-        temp = questions[questionIndex-38].getAnswer();
+        txtQ3.setText((questionIndex+3) + ". " + questions.get(questionIndex+2).getContent());
+        temp = questions.get(questionIndex+2).getAnswer();
         a3.setText(temp[0]);
         b3.setText(temp[1]);
         c3.setText(temp[2]);
@@ -281,7 +269,7 @@ public class Part4 extends AppCompatActivity {
 
     private void playAudio(int audioIndex){
         try {
-            AssetFileDescriptor afd = getAssets().openFd("audio" + indexTest + "/" + audios[audioIndex]);
+            AssetFileDescriptor afd = getAssets().openFd("audio" + indexTest + "/" + audios[audioIndex-20]);
             mediaPlayerPart4 = new MediaPlayer();
             mediaPlayerPart4.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
             afd.close();

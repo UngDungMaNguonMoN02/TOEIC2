@@ -5,9 +5,8 @@ import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.ArrayList;
 
 public class DirectionPart1 extends AppCompatActivity {
 
@@ -15,6 +14,7 @@ public class DirectionPart1 extends AppCompatActivity {
     private int indexTest;
     private TextView txtTimer;
     private MediaPlayer mp3;
+    private ArrayList<Question> questions;
 
     private String ConvertTime(int s){
         int m = s/60;
@@ -31,6 +31,8 @@ public class DirectionPart1 extends AppCompatActivity {
 
         Intent intent = getIntent();
         indexTest = intent.getIntExtra("indexTest",1);
+        Bundle bundle = getIntent().getExtras();
+        questions = (ArrayList<Question>)bundle.getSerializable("questions");
 
         CounterForTest counter = new CounterForTest(remainingTime,1000);
         counter.start();
@@ -74,6 +76,9 @@ public class DirectionPart1 extends AppCompatActivity {
             Intent part1 = new Intent(DirectionPart1.this,Part1.class);
             part1.putExtra("remainingTime",remainingTime);
             part1.putExtra("indexTest",indexTest);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("questions",questions);
+            part1.putExtras(bundle);
             startActivity(part1);
         }
     }
