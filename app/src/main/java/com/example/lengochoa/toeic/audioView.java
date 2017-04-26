@@ -1,39 +1,20 @@
 package com.example.lengochoa.toeic;
 
-import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
-import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.MediaController;
-import android.widget.RadioButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-
-public class AnswerPart1 extends AppCompatActivity {
-
-
-    private RadioButton a,b,c,d;
-    private Button next,pre;
-    private TextView txtnoq;
-    private int curans;
-    private String[] answerSheet;
-    private String[] keys;
-    private String[] audios;
-    private int indexTest;
-    private ArrayList<Question> questions;
+public class audioView extends AppCompatActivity {
 
     private Button btnPlay, btnPause, btnForward, btnRewind;
     private MediaPlayer mediaPlayer;
@@ -47,34 +28,16 @@ public class AnswerPart1 extends AppCompatActivity {
     private SeekBar seekbar;
     private TextView txtTimeAudio;
 
-    private void displayQuestion(){
-        String[] ans = questions.get(curans).getAnswer();
-        a.setText(ans[0]);
-        b.setText(ans[1]);
-        c.setText(ans[2]);
-        d.setText(ans[3]);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_answer_part1);
+        setContentView(R.layout.activity_audio_view);
 
         btnPlay = (Button) findViewById(R.id.btnStart);
         btnPause = (Button) findViewById(R.id.btnPause);
         btnForward = (Button) findViewById(R.id.btnForward);
         btnRewind = (Button) findViewById(R.id.btnRewind);
         txtTimeAudio = (TextView)findViewById(R.id.txtTimeAudio);
-
-        curans = 0;
-        displayQuestion();
-        Intent intent = getIntent();
-        answerSheet = intent.getStringArrayExtra("answerSheet");
-        keys = intent.getStringArrayExtra("ansKey");
-        audios= intent.getStringArrayExtra("audios");
-        indexTest = intent.getIntExtra("indexTest",1);
-        Bundle bundle = getIntent().getExtras();
-        questions = (ArrayList<Question>)bundle.getSerializable("questions");
 
         mediaPlayer = new MediaPlayer();
         try
@@ -100,10 +63,16 @@ public class AnswerPart1 extends AppCompatActivity {
                     mediaPlayer.seekTo(progress);
                 }
             }
+
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
         });
         btnPause.setEnabled(false);
 
@@ -157,67 +126,13 @@ public class AnswerPart1 extends AppCompatActivity {
             }
         });
 
-        a = (RadioButton)findViewById(R.id.rdba);
-        b = (RadioButton)findViewById(R.id.rdbb);
-        c = (RadioButton)findViewById(R.id.rdbc);
-        d = (RadioButton)findViewById(R.id.rdbd);
-
-        txtnoq = (TextView)findViewById(R.id.txtnoq);
-        pre = (Button)findViewById(R.id.btnPre);
-        next = (Button)findViewById((R.id.btnNext));
-
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(curans<9){
-                    curans++;
-                    txtnoq.setText(curans+1+"/10");
-                    displayQuestion();
-                }
-            }
-        });
-
-        pre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(curans>0){
-                    curans--;
-                    txtnoq.setText(curans+1+"/10");
-                    displayQuestion();
-                }
-            }
-        });
-
-        if(keys[curans].equals("A")) a.setTextColor(Color.GREEN);
-        else if(keys[curans].equals("B")) b.setTextColor(Color.GREEN);
-        else if(keys[curans].equals("C")) c.setTextColor(Color.GREEN);
-        else d.setTextColor(Color.GREEN);
-
-        if(!answerSheet[curans].equals(keys[curans])){
-            if(answerSheet[curans].equals("A")) {
-                a.setChecked(true);
-                a.setTextColor(Color.RED);
-            }
-            else if(answerSheet[curans].equals("B")){
-                b.setChecked(true);
-                b.setTextColor(Color.RED);
-            }
-            else if(answerSheet[curans].equals("C")) {
-                c.setChecked(true);
-                c.setTextColor(Color.RED);
-            }
-            else {
-                d.setChecked(true);
-                d.setTextColor(Color.RED);
-            }
-        }
     }
 
     private Runnable UpdateSongTime = new Runnable()
     {
         public void run() {
             startTime = mediaPlayer.getCurrentPosition();
-            txtTimeAudio.setText(String.format("%d s", TimeUnit.MILLISECONDS.toSeconds((long) startTime)));
+            txtTimeAudio.setText(String.format("%d s",TimeUnit.MILLISECONDS.toSeconds((long) startTime)));
             seekbar.setProgress((int)startTime);
             m_Handler.postDelayed(this, 100);
         }

@@ -21,17 +21,6 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="15dp"/>
 
-    <ImageSwitcher
-        android:layout_width="match_parent"
-        android:id="@+id/imgswtch"
-        android:layout_below="@+id/txtTimer"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="18dp"
-        android:layout_centerHorizontal="true"
-        android:layout_height="227dp" />
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -90,13 +79,90 @@
         android:layout_margin="17pt"
         android:layout_height="40dp" />
 
-    <VideoView
+    <ImageSwitcher
+        android:layout_width="match_parent"
+        android:id="@+id/imgswtch"
+        android:layout_height="227dp"
+        android:layout_below="@+id/txtnoq"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <SeekBar
         android:layout_width="wrap_content"
-        android:layout_height="10dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_above="@+id/btnForward"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/videoView"
-        android:layout_above="@+id/scrollView3" />
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/txtTimeAudio"
+        android:layout_alignTop="@+id/seekBar"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@android:drawable/ic_media_previous"
+        android:drawableStart="@android:drawable/ic_media_previous"
+        android:id="@+id/btnRewind"
+        android:background="@drawable/shape"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnForward"
+        android:drawableLeft="@android:drawable/ic_media_next"
+        android:drawableStart="@android:drawable/ic_media_next"
+        android:background="@drawable/shape"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnRewind"
+        android:layout_toEndOf="@+id/btnRewind"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@android:drawable/ic_media_pause"
+        android:drawableStart="@android:drawable/ic_media_pause"
+        android:id="@+id/btnPause"
+        android:background="@drawable/shape"
+        android:gravity="center"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnStart"
+        android:layout_toEndOf="@+id/btnStart" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnStart"
+        android:text=""
+        android:background="@drawable/shape"
+        android:gravity="center"
+        android:drawableLeft="@android:drawable/ic_media_play"
+        android:drawableStart="@android:drawable/ic_media_play"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/btnForward"
+        android:layout_toEndOf="@+id/btnForward"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
 
 
 </RelativeLayout>

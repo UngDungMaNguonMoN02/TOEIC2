@@ -8,7 +8,7 @@
         android:label="TOEIC 900"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AnswerPart1">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,8 +24,9 @@
         <activity android:name=".DirectionPart2" />
         <activity android:name=".DirectionPart3" />
         <activity android:name=".DirectionPart4" />
-        <!--<activity android:name=".AnswerPart1" />-->
-        <activity android:name=".AnswerPart2"></activity>
+        <activity android:name=".AnswerPart1" />
+        <activity android:name=".AnswerPart2" />
+        <!--<activity android:name=".audioView"></activity>-->
     </application>
 
 </manifest>
