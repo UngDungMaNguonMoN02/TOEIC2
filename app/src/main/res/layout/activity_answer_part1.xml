@@ -62,7 +62,7 @@
     <Button
         android:text=""
         android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_height="32dp"
         android:id="@+id/btnNext"
         android:drawableLeft="@android:drawable/ic_media_ff"
         android:layout_alignBaseline="@+id/txtnoq"
@@ -77,7 +77,7 @@
         android:layout_alignBaseline="@+id/txtnoq"
         android:layout_alignTop="@+id/txtnoq"
         android:layout_margin="17pt"
-        android:layout_height="40dp" />
+        android:layout_height="32dp" />
 
     <ImageSwitcher
         android:layout_width="match_parent"
@@ -88,15 +88,15 @@
         android:layout_alignParentStart="true" />
 
     <SeekBar
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
         android:layout_above="@+id/btnForward"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/scrollView3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -106,12 +106,12 @@
         android:id="@+id/txtTimeAudio"
         android:layout_alignTop="@+id/seekBar"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:drawableLeft="@android:drawable/ic_media_previous"
         android:drawableStart="@android:drawable/ic_media_previous"
         android:id="@+id/btnRewind"
@@ -119,11 +119,12 @@
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="70dp"/>
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/btnForward"
         android:drawableLeft="@android:drawable/ic_media_next"
         android:drawableStart="@android:drawable/ic_media_next"
@@ -136,8 +137,8 @@
         android:layout_marginStart="11dp" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:drawableLeft="@android:drawable/ic_media_pause"
         android:drawableStart="@android:drawable/ic_media_pause"
         android:id="@+id/btnPause"
@@ -150,8 +151,8 @@
         android:layout_toEndOf="@+id/btnStart" />
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:id="@+id/btnStart"
         android:text=""
         android:background="@drawable/shape"

@@ -30,7 +30,7 @@ public class Menu extends AppCompatActivity {
         answerSheet = intent.getStringArrayExtra("answerSheet");
         audios = intent.getStringArrayExtra("audios");
         indexTest = intent.getIntExtra("indexTest",1);
-        ansKey = new String[101];
+        ansKey = new String[100];
         int i = 0;
         for(Question q : questions){
             ansKey[i] = q.getKey();
@@ -44,8 +44,8 @@ public class Menu extends AppCompatActivity {
         txtPoint = (EditText)findViewById(R.id.txtPoint);
         txtPoint.setText("Bạn đúng " + point + " câu/100");
 
-        final Button btnPart1 = (Button)findViewById(R.id.btnPart1);
-        btnPart1.setOnClickListener(new View.OnClickListener() {
+        final Button btnAnswerPart1 = (Button)findViewById(R.id.btnPart1);
+        btnAnswerPart1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent AnswerPart1 = new Intent(Menu.this,AnswerPart1.class);

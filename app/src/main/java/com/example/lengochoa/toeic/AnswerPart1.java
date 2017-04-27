@@ -10,7 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageSwitcher;
 import android.widget.MediaController;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
@@ -29,9 +32,7 @@ public class AnswerPart1 extends AppCompatActivity {
     private Button next,pre;
     private TextView txtnoq;
     private int curans;
-    private String[] answerSheet;
-    private String[] keys;
-    private String[] audios;
+    private String[] answerSheet, keys, audios;
     private int indexTest;
     private ArrayList<Question> questions;
 
@@ -47,48 +48,37 @@ public class AnswerPart1 extends AppCompatActivity {
     private SeekBar seekbar;
     private TextView txtTimeAudio;
 
+    private ImageSwitcher imageSwitcher;
+
+    public int getResIdByName(String resName)  {
+        return getResources().getIdentifier(resName , "drawable", getPackageName());
+    }
+
     private void displayQuestion(){
         String[] ans = questions.get(curans).getAnswer();
         a.setText(ans[0]);
         b.setText(ans[1]);
         c.setText(ans[2]);
         d.setText(ans[3]);
+        imageSwitcher.setBackgroundResource(getResIdByName("t" + indexTest + "img" + (curans+1)));
+        Animation in= AnimationUtils.loadAnimation(AnswerPart1.this, android.R.anim.slide_in_left);
+        in.setDuration(1000);
+        imageSwitcher.startAnimation(in);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_answer_part1);
-
-        btnPlay = (Button) findViewById(R.id.btnStart);
-        btnPause = (Button) findViewById(R.id.btnPause);
-        btnForward = (Button) findViewById(R.id.btnForward);
-        btnRewind = (Button) findViewById(R.id.btnRewind);
-        txtTimeAudio = (TextView)findViewById(R.id.txtTimeAudio);
-
-        curans = 0;
-        displayQuestion();
-        Intent intent = getIntent();
-        answerSheet = intent.getStringArrayExtra("answerSheet");
-        keys = intent.getStringArrayExtra("ansKey");
-        audios= intent.getStringArrayExtra("audios");
-        indexTest = intent.getIntExtra("indexTest",1);
-        Bundle bundle = getIntent().getExtras();
-        questions = (ArrayList<Question>)bundle.getSerializable("questions");
-
+    private void startAudio(){
         mediaPlayer = new MediaPlayer();
         try
         {
-            AssetFileDescriptor afd = getAssets().openFd("audio1/a01.mp3");
+            AssetFileDescriptor afd = getAssets().openFd("audio"+indexTest +"/"+audios[curans]);
             mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
             afd.close();
         }
-        catch (Exception ex) {}
+        catch (Exception ex) {return;}
 
         try { mediaPlayer.prepare();}
-        catch (Exception ex) {}
+        catch (Exception ex) {ex.getMessage();}
 
-        seekbar = (SeekBar)findViewById(R.id.seekBar);
         finalTime = mediaPlayer.getDuration();
         seekbar.setMax((int) finalTime);
         startTime = mediaPlayer.getCurrentPosition();
@@ -105,7 +95,35 @@ public class AnswerPart1 extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
+        btnPlay.setEnabled(true);
         btnPause.setEnabled(false);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_answer_part1);
+
+        imageSwitcher = (ImageSwitcher) findViewById(R.id.imgswtch);
+        Animation in= AnimationUtils.loadAnimation(AnswerPart1.this, android.R.anim.slide_in_left);
+        in.setDuration(1000);
+        imageSwitcher.startAnimation(in);
+
+        btnPlay = (Button) findViewById(R.id.btnStart);
+        btnPause = (Button) findViewById(R.id.btnPause);
+        btnForward = (Button) findViewById(R.id.btnForward);
+        btnRewind = (Button) findViewById(R.id.btnRewind);
+        txtTimeAudio = (TextView)findViewById(R.id.txtTimeAudio);
+
+        Intent intent = getIntent();
+        answerSheet = intent.getStringArrayExtra("answerSheet");
+        keys = intent.getStringArrayExtra("ansKey");
+        audios= intent.getStringArrayExtra("audios");
+        indexTest = intent.getIntExtra("indexTest",1);
+        Bundle bundle = getIntent().getExtras();
+        questions = (ArrayList<Question>)bundle.getSerializable("questions");
+
+        seekbar = (SeekBar)findViewById(R.id.seekBar);
 
         btnPlay.setOnClickListener(new View.OnClickListener()
         {
@@ -173,6 +191,8 @@ public class AnswerPart1 extends AppCompatActivity {
                     curans++;
                     txtnoq.setText(curans+1+"/10");
                     displayQuestion();
+                    mediaPlayer.release();
+                    startAudio();
                 }
             }
         });
@@ -184,6 +204,8 @@ public class AnswerPart1 extends AppCompatActivity {
                     curans--;
                     txtnoq.setText(curans+1+"/10");
                     displayQuestion();
+                    mediaPlayer.release();
+                    startAudio();
                 }
             }
         });
@@ -211,6 +233,10 @@ public class AnswerPart1 extends AppCompatActivity {
                 d.setTextColor(Color.RED);
             }
         }
+
+        curans = 0;
+        displayQuestion();
+        startAudio();
     }
 
     private Runnable UpdateSongTime = new Runnable()
