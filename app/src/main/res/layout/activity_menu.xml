@@ -8,7 +8,6 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    android:background="@android:color/holo_orange_light"
     tools:context="com.example.lengochoa.toeic.Menu">
 
     <Button
@@ -21,7 +20,8 @@
         android:drawableLeft="@android:drawable/ic_menu_gallery"
         android:text="PART 1"
         android:textSize="8pt"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"/>
 
     <Button
         android:id="@+id/btnPart2"
@@ -32,7 +32,8 @@
         android:drawableLeft="@android:drawable/ic_menu_edit"
         android:text="PART 2"
         android:textSize="8pt"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginRight="20dp"/>
 
     <Button
         android:id="@+id/btnPart3"
@@ -45,7 +46,8 @@
         android:drawableLeft="@android:drawable/ic_menu_slideshow"
         android:text="PART 3"
         android:textSize="8pt"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"/>
 
     <Button
         android:id="@+id/btnPart4"
@@ -57,16 +59,16 @@
         android:drawableLeft="@android:drawable/ic_menu_more"
         android:text="PART 4"
         android:textSize="8pt"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginRight="20dp"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="none"
         android:text="Đáp án đề thi"
         android:ems="10"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="21dp"
         android:id="@+id/editText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -75,12 +77,13 @@
         android:gravity="center"
         android:textStyle="bold"
         android:textColor="@color/colorPrimary"
-        android:textSize="35sp"/>
+        android:textSize="35sp"
+        android:enabled="false"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="none"
         android:text=""
         android:ems="10"
         android:layout_below="@+id/btnPart3"
@@ -89,5 +92,7 @@
         android:layout_marginTop="30dp"
         android:id="@+id/txtPoint"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:enabled="false"/>
 </RelativeLayout>

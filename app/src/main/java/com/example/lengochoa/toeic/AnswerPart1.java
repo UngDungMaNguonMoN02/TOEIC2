@@ -60,6 +60,37 @@ public class AnswerPart1 extends AppCompatActivity {
         b.setText(ans[1]);
         c.setText(ans[2]);
         d.setText(ans[3]);
+        a.setTextColor(Color.BLACK);
+        b.setTextColor(Color.BLACK);
+        c.setTextColor(Color.BLACK);
+        d.setTextColor(Color.BLACK);
+        if(keys[curans].equals("A")) a.setTextColor(Color.rgb(95,139,101));
+        else if(keys[curans].equals("B")) b.setTextColor(Color.rgb(95,139,101));
+        else if(keys[curans].equals("C")) c.setTextColor(Color.rgb(95,139,101));
+        else d.setTextColor(Color.rgb(95,139,101));
+
+        if(!answerSheet[curans].equals(keys[curans])){
+            if(answerSheet[curans].equals("A")) {
+                a.setChecked(true);
+                a.setText(a.getText() + " (Sai)");
+                a.setTextColor(Color.rgb(188,42,70));
+            }
+            else if(answerSheet[curans].equals("B")){
+                b.setChecked(true);
+                b.setText(b.getText() + " (Sai)");
+                b.setTextColor(Color.rgb(188,42,70));
+            }
+            else if(answerSheet[curans].equals("C")) {
+                c.setChecked(true);
+                c.setText(c.getText() + " (Sai)");
+                c.setTextColor(Color.rgb(188,42,70));
+            }
+            else {
+                d.setChecked(true);
+                d.setText(d.getText() + " (Sai)");
+                d.setTextColor(Color.rgb(188,42,70));
+            }
+        }
         imageSwitcher.setBackgroundResource(getResIdByName("t" + indexTest + "img" + (curans+1)));
         Animation in= AnimationUtils.loadAnimation(AnswerPart1.this, android.R.anim.slide_in_left);
         in.setDuration(1000);
@@ -209,30 +240,6 @@ public class AnswerPart1 extends AppCompatActivity {
                 }
             }
         });
-
-        if(keys[curans].equals("A")) a.setTextColor(Color.GREEN);
-        else if(keys[curans].equals("B")) b.setTextColor(Color.GREEN);
-        else if(keys[curans].equals("C")) c.setTextColor(Color.GREEN);
-        else d.setTextColor(Color.GREEN);
-
-        if(!answerSheet[curans].equals(keys[curans])){
-            if(answerSheet[curans].equals("A")) {
-                a.setChecked(true);
-                a.setTextColor(Color.RED);
-            }
-            else if(answerSheet[curans].equals("B")){
-                b.setChecked(true);
-                b.setTextColor(Color.RED);
-            }
-            else if(answerSheet[curans].equals("C")) {
-                c.setChecked(true);
-                c.setTextColor(Color.RED);
-            }
-            else {
-                d.setChecked(true);
-                d.setTextColor(Color.RED);
-            }
-        }
 
         curans = 0;
         displayQuestion();

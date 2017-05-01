@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Part3 extends AppCompatActivity {
 
@@ -175,7 +176,12 @@ public class Part3 extends AppCompatActivity {
                 nextQuestion.cancel();
                 mediaPlayerPart3.release();
                 for(int i = 40; i < 70; i++){
-                    answerSheet[i]="C";
+                    Random random = new Random();
+                    int n = random.nextInt(4);
+                    if(n==1) answerSheet[i]="A";
+                    else if(n==2) answerSheet[i]="B";
+                    else if(n==3) answerSheet[i]="C";
+                    else answerSheet[i]="D";
                 }
                 Intent part4 = new Intent(Part3.this,Part4.class);
                 part4.putExtra("answerSheet",answerSheet);

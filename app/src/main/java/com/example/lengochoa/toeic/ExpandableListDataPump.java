@@ -18,9 +18,9 @@ public class ExpandableListDataPump {
         HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
         List<String> test = new ArrayList<String>();
         test.add("Test 1");
-        test.add("Test 2");
-        test.add("Test 3");
-        test.add("Test 4");
+//        test.add("Test 2");
+//        test.add("Test 3");
+//        test.add("Test 4");
 
         expandableListDetail.put(temp, test);
         return expandableListDetail;

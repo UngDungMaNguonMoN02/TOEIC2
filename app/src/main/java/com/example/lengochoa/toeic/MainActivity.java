@@ -19,29 +19,13 @@ public class MainActivity extends AppCompatActivity {
     private int idxTest;
     private ArrayList<Question> questions;
 
-    private String dbname = "toeic.sqlite";
+    private String dbname = "toeic1.sqlite";
 
     private void initQuestions(){
         SQLiteDatabase database = null;
         questions=new ArrayList<>();
         try{
             database = Database.initDatabase(MainActivity.this, dbname);
-            for(int j = 0 ; j < 10 ; j++){
-                String query = "INSERT INTO questions (test_id,part_id,data) VALUES(1,1,'...@a"+j+"-b"+j+"-c"+j+"-d"+j+"@A')";
-                database.execSQL(query);
-            }
-            for(int j = 10; j < 40 ; j++){
-                String query = "INSERT INTO questions (test_id,part_id,data) VALUES(1,2,'content"+j+"@a"+j+"-b"+j+"-c"+j+"@B')";
-                database.execSQL(query);
-            }
-            for(int j = 40; j < 70 ; j++){
-                String query = "INSERT INTO questions (test_id,part_id,data) VALUES(1,3,'content"+j+"@a"+j+"-b"+j+"-c"+j+"-d"+j+"@C')";
-                database.execSQL(query);
-            }
-            for(int j = 70; j < 100 ; j++){
-                String query = "INSERT INTO questions (test_id,part_id,data) VALUES(1,4,'content"+j+"@a"+j+"-b"+j+"-c"+j+"-d"+j+"@D')";
-                database.execSQL(query);
-            }
         } catch (Exception e){Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();}
 
         for(int idx = 1; idx <= 4; idx++){
@@ -49,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 Cursor cursor = database.rawQuery("select * from questions where test_id = " + idxTest + " and part_id = " + idx ,null);
                 while(cursor.moveToNext()){
                     Question temp_q = new Question();
-                    String data = cursor.getString(3);
+                    String data = cursor.getString(2);
                     String[] temp = data.split("@");
                     String[] ans = temp[1].split("-");
                     temp_q.setQuestion(temp[0],ans,temp[2],((idx==2)?3:4));
@@ -65,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        idxTest = 1;
+        idxTest = -1;
 
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
         expandableListDetail = ExpandableListDataPump.getData("Chọn test để kiểm tra ...");
@@ -97,13 +81,18 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                initQuestions();
-                Intent direction_part1 = new Intent(MainActivity.this,Part1.class);
-                direction_part1.putExtra("indexTest",idxTest);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("questions",questions);
-                direction_part1.putExtras(bundle);
-                startActivity(direction_part1);
+                if(idxTest!=-1){
+                    initQuestions();
+                    Intent direction_part1 = new Intent(MainActivity.this,Part1.class);
+                    direction_part1.putExtra("indexTest",idxTest);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("questions",questions);
+                    direction_part1.putExtras(bundle);
+                    startActivity(direction_part1);
+                }
+                else {
+                    Toast.makeText( getApplicationContext(), "Bạn chưa chọn test nào !", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

@@ -12,6 +12,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Part2 extends AppCompatActivity {
 
@@ -90,7 +91,12 @@ public class Part2 extends AppCompatActivity {
                 nextQuestion.cancel();
                 mediaPlayerPart2.release();
                 for(int i = 10; i < 40; i++){
-                    answerSheet[i]="B";
+                    Random random = new Random();
+                    int n = random.nextInt(4);
+                    if(n==1) answerSheet[i]="A";
+                    else if(n==2) answerSheet[i]="B";
+                    else if(n==3) answerSheet[i]="C";
+                    else answerSheet[i]="D";
                 }
                 Intent part3 = new Intent(Part2.this,Part3.class);
                 part3.putExtra("answerSheet",answerSheet);

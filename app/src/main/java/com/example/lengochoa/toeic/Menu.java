@@ -62,7 +62,14 @@ public class Menu extends AppCompatActivity {
         btnPart2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent AnswerPart2 = new Intent(Menu.this,AnswerPart2.class);
+                AnswerPart2.putExtra("answerSheet",answerSheet);
+                AnswerPart2.putExtra("ansKey",ansKey);
+                AnswerPart2.putExtra("audios",audios);
+                AnswerPart2.putExtra("indexTest",indexTest);
+                bundle.putSerializable("questions",questions);
+                AnswerPart2.putExtras(bundle);
+                startActivity(AnswerPart2);
             }
         });
         final Button btnPart3 = (Button)findViewById(R.id.btnPart3);
