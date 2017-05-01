@@ -4,22 +4,17 @@ import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
-import android.widget.MediaController;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -47,6 +42,7 @@ public class AnswerPart1 extends AppCompatActivity {
     private int backwardTime = 5000;
     private SeekBar seekbar;
     private TextView txtTimeAudio;
+    private Button btnMenu;
 
     private ImageSwitcher imageSwitcher;
 
@@ -144,6 +140,7 @@ public class AnswerPart1 extends AppCompatActivity {
         btnPause = (Button) findViewById(R.id.btnPause);
         btnForward = (Button) findViewById(R.id.btnForward);
         btnRewind = (Button) findViewById(R.id.btnRewind);
+        btnMenu = (Button) findViewById(R.id.btnMenu);
         txtTimeAudio = (TextView)findViewById(R.id.txtTimeAudio);
 
         Intent intent = getIntent();
@@ -244,6 +241,16 @@ public class AnswerPart1 extends AppCompatActivity {
         curans = 0;
         displayQuestion();
         startAudio();
+
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.release();
+                m_Handler.removeCallbacks(UpdateSongTime);
+                Intent menu = new Intent(AnswerPart1.this,Menu.class);
+                startActivity(menu);
+            }
+        });
     }
 
     private Runnable UpdateSongTime = new Runnable()
