@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 Cursor cursor = database.rawQuery("select * from questions where test_id = " + idxTest + " and part_id = " + idx ,null);
                 while(cursor.moveToNext()){
                     Question temp_q = new Question();
-                    String data = cursor.getString(2);
+                    String data = cursor.getString(2).trim();
                     String[] temp = data.split("@");
                     String[] ans = temp[1].split("-");
                     temp_q.setQuestion(temp[0],ans,temp[2],((idx==2)?3:4));

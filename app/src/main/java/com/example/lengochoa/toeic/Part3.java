@@ -177,10 +177,10 @@ public class Part3 extends AppCompatActivity {
                 mediaPlayerPart3.release();
                 for(int i = 40; i < 70; i++){
                     Random random = new Random();
-                    int n = random.nextInt(4);
-                    if(n==1) answerSheet[i]="A";
-                    else if(n==2) answerSheet[i]="B";
-                    else if(n==3) answerSheet[i]="C";
+                    int n = random.nextInt(3);
+                    if(n==0) answerSheet[i]="A";
+                    else if(n==1) answerSheet[i]="B";
+                    else if(n==2) answerSheet[i]="C";
                     else answerSheet[i]="D";
                 }
                 Intent part4 = new Intent(Part3.this,Part4.class);

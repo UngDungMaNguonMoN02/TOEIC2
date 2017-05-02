@@ -118,10 +118,10 @@ public class Part1 extends AppCompatActivity{
                 mediaPlayerPart1.release();
                 for(int i = 0 ; i < 10 ;i++){
                     Random random = new Random();
-                    int n = random.nextInt(4);
-                    if(n==1) answerSheet[i]="A";
-                    else if(n==2) answerSheet[i]="B";
-                    else if(n==3) answerSheet[i]="C";
+                    int n = random.nextInt(3);
+                    if(n==0) answerSheet[i]="A";
+                    else if(n==1) answerSheet[i]="B";
+                    else if(n==2) answerSheet[i]="C";
                     else answerSheet[i]="D";
                 }
                 Intent part2 = new Intent(Part1.this,Part2.class);

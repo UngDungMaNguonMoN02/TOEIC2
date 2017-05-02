@@ -2,9 +2,7 @@ package com.example.lengochoa.toeic;
 
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -17,14 +15,12 @@ import android.widget.ImageSwitcher;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 
 public class AnswerPart1 extends AppCompatActivity {
-
 
     private RadioButton a,b,c,d;
     private Button next,pre;
@@ -90,33 +86,44 @@ public class AnswerPart1 extends AppCompatActivity {
                 default:break;
             }
         }
+
         else{
-            switch (keys[curans]){
-                case"A":
-                    a.setText(a.getText() + " " + getString(R.string.right));
-                    a.setTextColor(Color.rgb(95,139,101));break;
+            switch (answerSheet[curans]){
+                case "A":
+                    a.setText(a.getText() + " " + getString(R.string.right));;break;
                 case "B":
-                    b.setText(b.getText() + " " + getString(R.string.right));
-                    b.setTextColor(Color.rgb(95,139,101));break;
+                    b.setText(b.getText() + " " + getString(R.string.right));break;
                 case "C":
-                    c.setText(c.getText() + " " + getString(R.string.right));
-                    c.setTextColor(Color.rgb(95,139,101));break;
+                    c.setText(c.getText() + " " + getString(R.string.right));break;
                 case "D":
-                    d.setText(d.getText() + " " + getString(R.string.right));
-                    d.setTextColor(Color.rgb(95,139,101));break;
+                    d.setText(d.getText() + " " + getString(R.string.right));break;
                 default:break;
             }
         }
 
+        switch (keys[curans]){
+            case"A":
+                a.setTextColor(Color.rgb(95,139,101));break;
+            case "B":
+                b.setTextColor(Color.rgb(95,139,101));break;
+            case "C":
+                c.setTextColor(Color.rgb(95,139,101));break;
+            case "D":
+                d.setTextColor(Color.rgb(95,139,101));break;
+            default:break;
+        }
+
+
         imageSwitcher.setBackgroundResource(getResIdByName("t" + indexTest + "img" + (curans+1)));
         Animation in= AnimationUtils.loadAnimation(AnswerPart1.this, android.R.anim.slide_in_left);
-        in.setDuration(1000);
+        in.setDuration(1700);
         imageSwitcher.startAnimation(in);
     }
 
     private void startAudio(){
         mediaPlayer = new MediaPlayer();
         run = true;
+        btnPlay.setText(getString(R.string.play));
         try
         {
             AssetFileDescriptor afd = getAssets().openFd("audio"+indexTest +"/"+audios[curans]);
@@ -155,7 +162,7 @@ public class AnswerPart1 extends AppCompatActivity {
 
         imageSwitcher = (ImageSwitcher) findViewById(R.id.imgswtch);
         Animation in= AnimationUtils.loadAnimation(AnswerPart1.this, android.R.anim.slide_in_left);
-        in.setDuration(1000);
+        in.setDuration(1700);
         imageSwitcher.startAnimation(in);
 
         btnPlay = (Button) findViewById(R.id.btnStart);
@@ -179,7 +186,8 @@ public class AnswerPart1 extends AppCompatActivity {
             @Override
             public void run() {
                 startTime = mediaPlayer.getCurrentPosition();
-                txtTimeAudio.setText(String.format("%d s", TimeUnit.MILLISECONDS.toSeconds((long) startTime)));
+                long s = TimeUnit.MILLISECONDS.toSeconds((long) startTime);
+                txtTimeAudio.setText((s<10)?("0:0"+s):("0:"+s));
                 seekbar.setProgress((int)startTime);
                 m_Handler.postDelayed(this, 100);
             }
@@ -195,14 +203,12 @@ public class AnswerPart1 extends AppCompatActivity {
                     m_Handler.postDelayed(updateSongTime,100);
 //                  btnPause.setEnabled(true);
 //                  btnPlay.setEnabled(false);
-                    btnPlay.setText(getString(R.string.play));
-                    Toast.makeText(getApplicationContext(),"Play",Toast.LENGTH_SHORT).show();
+                    btnPlay.setText(getString(R.string.pause));
                     run=false;
                 }
                 else{
                     mediaPlayer.pause();
-                    btnPlay.setText(getString(R.string.pause));
-                    Toast.makeText(getApplicationContext(),"Pause",Toast.LENGTH_SHORT).show();
+                    btnPlay.setText(getString(R.string.play));
                     run=true;
                 }
             }

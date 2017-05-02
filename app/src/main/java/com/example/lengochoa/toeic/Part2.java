@@ -90,13 +90,13 @@ public class Part2 extends AppCompatActivity {
                 timer.cancel();
                 nextQuestion.cancel();
                 mediaPlayerPart2.release();
+                Random rd = new Random();
+                int n ;
                 for(int i = 10; i < 40; i++){
-                    Random random = new Random();
-                    int n = random.nextInt(4);
-                    if(n==1) answerSheet[i]="A";
-                    else if(n==2) answerSheet[i]="B";
-                    else if(n==3) answerSheet[i]="C";
-                    else answerSheet[i]="D";
+                    n = rd.nextInt(2);
+                    if(n==0) answerSheet[i]="A";
+                    else if(n==1) answerSheet[i]="B";
+                    else answerSheet[i]="C";
                 }
                 Intent part3 = new Intent(Part2.this,Part3.class);
                 part3.putExtra("answerSheet",answerSheet);

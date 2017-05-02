@@ -10,4 +10,126 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.lengochoa.toeic.AnswerPart2">
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/radioGroup"
+
+        android:layout_marginTop="101dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RadioButton
+            android:id="@+id/rdba"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textStyle="bold"/>
+        <RadioButton
+            android:id="@+id/rdbb"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textStyle="bold" />
+        <RadioButton
+            android:id="@+id/rdbc"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textStyle="bold" />
+    </RadioGroup>
+
+    <TextView
+        android:text="11/40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtnoq"
+        android:layout_marginTop="13dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnMenu"
+        android:visibility="visible"
+        android:padding="5dp"
+        android:layout_alignBaseline="@+id/btnPre"
+        android:layout_alignBottom="@+id/btnPre"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="19dp"
+        android:layout_marginEnd="19dp" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="32dp"
+        android:id="@+id/btnNext"
+        android:drawableRight="@android:drawable/ic_media_ff"
+        android:drawableEnd="@android:drawable/ic_media_ff"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/btnPre"
+        android:layout_toEndOf="@+id/btnPre" />
+
+    <Button
+        android:text=""
+        android:layout_width="50dp"
+        android:id="@+id/btnPre"
+        android:drawableLeft="@android:drawable/ic_media_rew"
+        android:drawableStart="@android:drawable/ic_media_rew"
+        android:drawablePadding="8dp"
+        android:layout_height="32dp"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/txtnoq"
+        android:layout_toEndOf="@+id/txtnoq" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnMenu"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/txtquestion"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="fill"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <SeekBar
+        android:layout_width="277dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="13dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/txtTimeAudio"
+        android:layout_alignTop="@+id/seekBar"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:paddingTop="7dp"/>
+    <Button
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:id="@+id/btnStart"
+        android:background="@drawable/shape"
+        android:gravity="center"
+        android:text="@string/play"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:layout_alignTop="@+id/seekBar"
+        android:layout_toRightOf="@+id/seekBar"
+        android:layout_toEndOf="@+id/seekBar" />
+
 </RelativeLayout>
