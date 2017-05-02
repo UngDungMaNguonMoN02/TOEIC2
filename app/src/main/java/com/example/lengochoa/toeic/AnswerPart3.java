@@ -43,7 +43,7 @@ public class AnswerPart3 extends AppCompatActivity {
 
     private void displayQuestion(Object a,Object b,Object c,Object d,Object txtquestion,int offset){
         String question = questions.get(curans+offset).getContent();
-        ((TextView)txtquestion).setText((curans+offset+1) + ". " + question);
+        ((TextView)txtquestion).setText((curans+offset+1) + " . " + question);
         String[] ans = questions.get(curans+offset).getAnswer();
         ((RadioButton)a).setText(ans[0]);
         ((RadioButton)b).setText(ans[1]);
