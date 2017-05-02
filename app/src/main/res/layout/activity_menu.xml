@@ -94,5 +94,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:gravity="center"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:textColor="@color/colorAccent"
+        android:textStyle="italic"/>
 </RelativeLayout>

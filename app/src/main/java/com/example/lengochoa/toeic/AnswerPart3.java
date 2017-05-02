@@ -181,7 +181,7 @@ public class AnswerPart3 extends AppCompatActivity {
             @Override
             public void run() {
                 startTime = mediaPlayer.getCurrentPosition();
-                txtTimeAudio.setText(String.format("0:%d", TimeUnit.MILLISECONDS.toSeconds((long) startTime)));
+                txtTimeAudio.setText(String.format("0:%d", TimeUnit.MILLISECONDS.toSeconds((long) startTime)));//chinh lai hien thi thoi gian
                 seekbar.setProgress((int)startTime);
                 m_Handler.postDelayed(this, 100);
             }
