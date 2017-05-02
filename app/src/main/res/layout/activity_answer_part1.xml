@@ -19,14 +19,15 @@
         android:layout_below="@+id/txtTimer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:paddingBottom="5dp"/>
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imgswtch"
         android:id="@+id/scrl"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="25dp">
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -60,24 +61,28 @@
     </ScrollView>
 
     <Button
-        android:text=""
         android:layout_width="50dp"
         android:layout_height="32dp"
         android:id="@+id/btnNext"
-        android:drawableLeft="@android:drawable/ic_media_ff"
+        android:drawableRight="@android:drawable/ic_media_ff"
+        android:drawableEnd="@android:drawable/ic_media_ff"
         android:layout_alignBaseline="@+id/txtnoq"
         android:layout_alignTop="@+id/txtnoq"
-        android:layout_margin="40pt"/>
+        android:layout_margin="40pt"
+        android:gravity="center_horizontal" />
 
     <Button
         android:text=""
         android:layout_width="50dp"
         android:id="@+id/btnPre"
         android:drawableLeft="@android:drawable/ic_media_rew"
+        android:drawableStart="@android:drawable/ic_media_rew"
+        android:drawablePadding="8dp"
         android:layout_alignBaseline="@+id/txtnoq"
         android:layout_alignTop="@+id/txtnoq"
         android:layout_margin="17pt"
-        android:layout_height="32dp" />
+        android:layout_height="32dp"
+        android:gravity="center_horizontal"/>
 
     <ImageSwitcher
         android:layout_width="match_parent"
@@ -85,16 +90,17 @@
         android:layout_height="227dp"
         android:layout_below="@+id/txtnoq"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"/>
 
     <SeekBar
-        android:layout_width="match_parent"
+        android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
         android:layout_below="@+id/imgswtch"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="13dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -108,60 +114,16 @@
         android:paddingTop="7dp"/>
 
     <Button
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:drawableLeft="@android:drawable/ic_media_previous"
-        android:drawableStart="@android:drawable/ic_media_previous"
-        android:id="@+id/btnRewind"
-        android:background="@drawable/shape"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="85dp" />
-
-    <Button
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:id="@+id/btnForward"
-        android:drawableLeft="@android:drawable/ic_media_next"
-        android:drawableStart="@android:drawable/ic_media_next"
-        android:background="@drawable/shape"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnRewind"
-        android:layout_toEndOf="@+id/btnRewind"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp" />
-
-    <Button
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:drawableLeft="@android:drawable/ic_media_pause"
-        android:drawableStart="@android:drawable/ic_media_pause"
-        android:id="@+id/btnPause"
-        android:background="@drawable/shape"
-        android:gravity="center"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnStart"
-        android:layout_toEndOf="@+id/btnStart" />
-
-    <Button
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
         android:id="@+id/btnStart"
-        android:text=""
         android:background="@drawable/shape"
         android:gravity="center"
-        android:drawableLeft="@android:drawable/ic_media_play"
-        android:drawableStart="@android:drawable/ic_media_play"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btnForward"
-        android:layout_toEndOf="@+id/btnForward"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp" />
+        android:text="@string/play"
+        android:textSize="25sp"
+        android:layout_alignTop="@+id/seekBar"
+        android:layout_toRightOf="@+id/seekBar"
+        android:layout_toEndOf="@+id/seekBar" />
 
     <Button
         android:text="menu"
