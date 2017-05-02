@@ -26,7 +26,8 @@
         <activity android:name=".DirectionPart4" />
         <activity android:name=".AnswerPart1" />
         <activity android:name=".AnswerPart2" />
-        <!--<activity android:name=".audioView"></activity>-->
+        <!-- <activity android:name=".audioView"></activity> -->
+        <activity android:name=".AnswerPart3"></activity>
     </application>
 
 </manifest>
