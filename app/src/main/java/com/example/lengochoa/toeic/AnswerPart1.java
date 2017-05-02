@@ -76,16 +76,16 @@ public class AnswerPart1 extends AppCompatActivity {
         if(!answerSheet[curans].equals(keys[curans])){
             switch (answerSheet[curans]){
                 case "A":
-                    a.setText(a.getText() + getString(R.string.wrong));
+                    a.setText(a.getText() + " " + getString(R.string.wrong));
                     a.setTextColor(Color.rgb(188,42,70));break;
                 case "B":
-                    b.setText(b.getText() + getString(R.string.wrong));
+                    b.setText(b.getText() + " " + getString(R.string.wrong));
                     b.setTextColor(Color.rgb(188,42,70));break;
                 case "C":
-                    c.setText(c.getText() + getString(R.string.wrong));
+                    c.setText(c.getText() + " " + getString(R.string.wrong));
                     c.setTextColor(Color.rgb(188,42,70));break;
                 case "D":
-                    d.setText(d.getText() + getString(R.string.wrong));
+                    d.setText(d.getText() + " " + getString(R.string.wrong));
                     d.setTextColor(Color.rgb(188,42,70));break;
                 default:break;
             }
@@ -93,16 +93,16 @@ public class AnswerPart1 extends AppCompatActivity {
         else{
             switch (keys[curans]){
                 case"A":
-                    a.setText(a.getText() + getString(R.string.right));
+                    a.setText(a.getText() + " " + getString(R.string.right));
                     a.setTextColor(Color.rgb(95,139,101));break;
                 case "B":
-                    b.setText(a.getText() + getString(R.string.right));
+                    b.setText(b.getText() + " " + getString(R.string.right));
                     b.setTextColor(Color.rgb(95,139,101));break;
                 case "C":
-                    c.setText(a.getText() + getString(R.string.right));
+                    c.setText(c.getText() + " " + getString(R.string.right));
                     c.setTextColor(Color.rgb(95,139,101));break;
                 case "D":
-                    d.setText(a.getText() + getString(R.string.right));
+                    d.setText(d.getText() + " " + getString(R.string.right));
                     d.setTextColor(Color.rgb(95,139,101));break;
                 default:break;
             }
@@ -193,14 +193,15 @@ public class AnswerPart1 extends AppCompatActivity {
                 if(run){
                     mediaPlayer.start();
                     m_Handler.postDelayed(updateSongTime,100);
-//                btnPause.setEnabled(true);
-//                    btnPlay.setEnabled(false);
+//                  btnPause.setEnabled(true);
+//                  btnPlay.setEnabled(false);
+                    btnPlay.setText(getString(R.string.play));
                     Toast.makeText(getApplicationContext(),"Play",Toast.LENGTH_SHORT).show();
                     run=false;
-
                 }
                 else{
                     mediaPlayer.pause();
+                    btnPlay.setText(getString(R.string.pause));
                     Toast.makeText(getApplicationContext(),"Pause",Toast.LENGTH_SHORT).show();
                     run=true;
                 }

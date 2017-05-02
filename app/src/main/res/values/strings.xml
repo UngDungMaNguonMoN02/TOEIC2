@@ -3,6 +3,6 @@
     <string name="title_activity_part3">Part3</string>
     <string name="play"> ► </string>
     <string name="pause"> ⚫ </string>
-    <string name="right" formatted="true"> ✔</string>
-    <string name="wrong" formatted="true"> ✘</string>
+    <string name="right"> ✔</string>
+    <string name="wrong"> ✘</string>
 </resources>
