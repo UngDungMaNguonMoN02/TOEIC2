@@ -19,7 +19,7 @@
         android:layout_below="@+id/txtTimer"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:paddingBottom="5dp"/>
 
     <ScrollView
@@ -66,23 +66,10 @@
         android:id="@+id/btnNext"
         android:drawableRight="@android:drawable/ic_media_ff"
         android:drawableEnd="@android:drawable/ic_media_ff"
-        android:layout_alignBaseline="@+id/txtnoq"
-        android:layout_alignTop="@+id/txtnoq"
-        android:layout_margin="40pt"
-        android:gravity="center_horizontal" />
-
-    <Button
-        android:text=""
-        android:layout_width="50dp"
-        android:id="@+id/btnPre"
-        android:drawableLeft="@android:drawable/ic_media_rew"
-        android:drawableStart="@android:drawable/ic_media_rew"
-        android:drawablePadding="8dp"
-        android:layout_alignBaseline="@+id/txtnoq"
-        android:layout_alignTop="@+id/txtnoq"
-        android:layout_margin="17pt"
-        android:layout_height="32dp"
-        android:gravity="center_horizontal"/>
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/btnPre"
+        android:layout_toEndOf="@+id/btnPre" />
 
     <ImageSwitcher
         android:layout_width="match_parent"
@@ -123,15 +110,26 @@
         android:layout_toEndOf="@+id/seekBar" />
 
     <Button
+        android:text=""
+        android:layout_width="50dp"
+        android:id="@+id/btnPre"
+        android:drawableLeft="@android:drawable/ic_media_rew"
+        android:drawableStart="@android:drawable/ic_media_rew"
+        android:drawablePadding="8dp"
+        android:layout_height="32dp"
+        android:gravity="center_horizontal"
+        android:layout_toRightOf="@+id/txtnoq"
+        android:layout_marginLeft="10dp"/>
+
+    <Button
         android:text="menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnMenu"
-        android:layout_toRightOf="@+id/btnPre"
-        android:layout_toEndOf="@+id/btnPre"
-        android:layout_marginLeft="23dp"
-        android:layout_marginStart="23dp"
-        android:layout_above="@+id/imgswtch" />
+        android:visibility="visible"
+        android:padding="5dp"
+        android:layout_toRightOf="@+id/btnNext"
+        android:layout_alignBottom="@+id/btnNext" />
 
 
 </RelativeLayout>
