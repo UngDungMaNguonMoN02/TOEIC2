@@ -160,7 +160,6 @@ public class AnswerPart4 extends AppCompatActivity {
         txtquestion1 = (TextView)findViewById(R.id.txtquestion1);
         txtquestion2 = (TextView)findViewById(R.id.txtquestion2);
         txtquestion3 = (TextView)findViewById(R.id.txtquestion3);
-
         a1 = (RadioButton)findViewById(R.id.rdba1);
         b1 = (RadioButton)findViewById(R.id.rdbb1);
         c1 = (RadioButton)findViewById(R.id.rdbc1);
@@ -183,6 +182,8 @@ public class AnswerPart4 extends AppCompatActivity {
         indexTest = intent.getIntExtra("indexTest",1);
         Bundle bundle = getIntent().getExtras();
         questions = (ArrayList<Question>)bundle.getSerializable("questions");
+
+
         seekbar = (SeekBar)findViewById(R.id.seekBar);
 
         final Runnable updateSongTime = new Runnable() {

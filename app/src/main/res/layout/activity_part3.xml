@@ -42,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/txtquestion1"
                 android:textStyle="bold"
-                android:textSize="21sp" />
+                android:textSize="21sp"
+                android:textColor="@color/colorPrimary"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -82,7 +83,8 @@
                 android:id="@+id/txtquestion2"
                 android:textStyle="bold"
                 android:textSize="21sp"
-                android:layout_marginTop="25dp"/>
+                android:layout_marginTop="25dp"
+                android:textColor="@color/colorPrimary"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -122,7 +124,8 @@
                 android:id="@+id/txtquestion3"
                 android:textStyle="bold"
                 android:textSize="21sp"
-                android:layout_marginTop="25dp"/>
+                android:layout_marginTop="25dp"
+                android:textColor="@color/colorPrimary"/>
 
             <RadioGroup
                 android:layout_width="wrap_content"

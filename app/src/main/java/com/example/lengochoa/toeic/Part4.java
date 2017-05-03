@@ -3,6 +3,7 @@ package com.example.lengochoa.toeic;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class Part4 extends AppCompatActivity {
     private int indexTest;
     private ArrayList<Question> questions;
     private Button nextPart;
+    private Typeface typeface;
 
     private String ConvertTime(int s){
         int m = s/60;
@@ -44,6 +46,8 @@ public class Part4 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part3);
 
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Fun Smiles.ttf");
+        typeface = Typeface.createFromAsset(getAssets(), "fonts/FallingSky.otf");
         a1=(RadioButton)findViewById(R.id.rdba1);
         a1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +151,7 @@ public class Part4 extends AppCompatActivity {
         txtQ2 = (TextView)findViewById(R.id.txtquestion2);
         txtQ3 = (TextView)findViewById(R.id.txtquestion3);
         txtTimer = (TextView)findViewById(R.id.txtTimer);
+        txtTimer.setTypeface(custom_font);
 
         Intent intent = getIntent();
         remainingTime = intent.getLongExtra("remaingTime",1L);
@@ -252,6 +257,7 @@ public class Part4 extends AppCompatActivity {
 
     private void displayQuestion(int questionIndex){
         txtQ1.setText((questionIndex+1) + ". " + questions.get(questionIndex).getContent());
+        txtQ1.setTypeface(typeface);
         String[] temp = questions.get(questionIndex).getAnswer();
         a1.setText(temp[0]);
         b1.setText(temp[1]);
@@ -259,6 +265,7 @@ public class Part4 extends AppCompatActivity {
         d1.setText(temp[3]);
 
         txtQ2.setText((questionIndex+2) + ". " + questions.get(questionIndex+1).getContent());
+        txtQ2.setTypeface(typeface);
         temp = questions.get(questionIndex+1).getAnswer();
         a2.setText(temp[0]);
         b2.setText(temp[1]);
@@ -266,6 +273,7 @@ public class Part4 extends AppCompatActivity {
         d2.setText(temp[3]);
 
         txtQ3.setText((questionIndex+3) + ". " + questions.get(questionIndex+2).getContent());
+        txtQ3.setTypeface(typeface);
         temp = questions.get(questionIndex+2).getAnswer();
         a3.setText(temp[0]);
         b3.setText(temp[1]);

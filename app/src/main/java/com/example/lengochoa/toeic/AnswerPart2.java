@@ -3,6 +3,7 @@ package com.example.lengochoa.toeic;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class AnswerPart2 extends AppCompatActivity {
 
     private Button btnPlay;
     private MediaPlayer mediaPlayer;
+    private Typeface custom_font;
 
     private double startTime = 0;
     private double finalTime = 0;
@@ -42,9 +44,19 @@ public class AnswerPart2 extends AppCompatActivity {
     private Button btnMenu;
     private boolean run;
 
+    private String addLetterSpacing(String question){
+        String[] temp = question.split(" ");
+        question="";
+        for (String s:temp) {
+            question+=s+"  ";
+        }
+        return question.trim();
+    }
+
     private void displayQuestion(){
         String question = questions.get(curans).getContent();
-        txtquestion.setText(question);
+        txtquestion.setText(addLetterSpacing(question));
+        txtquestion.setTypeface(custom_font);
         String[] ans = questions.get(curans).getAnswer();
         a.setText(ans[0]);
         b.setText(ans[1]);
@@ -142,6 +154,7 @@ public class AnswerPart2 extends AppCompatActivity {
         btnPlay = (Button) findViewById(R.id.btnStart);
         btnMenu = (Button) findViewById(R.id.btnMenu);
         txtTimeAudio = (TextView)findViewById(R.id.txtTimeAudio);
+        custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Sweet Sensations Personal Use.ttf");
         txtquestion = (TextView)findViewById(R.id.txtquestion);
         a = (RadioButton)findViewById(R.id.rdba);
         b = (RadioButton)findViewById(R.id.rdbb);

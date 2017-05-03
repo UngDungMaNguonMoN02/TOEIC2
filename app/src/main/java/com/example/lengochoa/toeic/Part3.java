@@ -47,7 +47,7 @@ public class Part3 extends AppCompatActivity {
         setContentView(R.layout.activity_part3);
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Fun Smiles.ttf");
-        typeface = Typeface.createFromAsset(getAssets(), "fonts/Sweet Sensations Personal Use.ttf");
+        typeface = Typeface.createFromAsset(getAssets(), "fonts/FallingSky.otf");
 
         a1=(RadioButton)findViewById(R.id.rdba1);
         a1.setOnClickListener(new View.OnClickListener() {
