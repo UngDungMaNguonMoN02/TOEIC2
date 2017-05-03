@@ -48,8 +48,6 @@ public class Menu extends AppCompatActivity {
             txtPoint = (EditText) findViewById(R.id.txtPoint);
             txtPoint.setText("Số câu đúng: " + point + "/100" + "\n" + "Bạn đạt được " + grade[point] + " điểm");
 
-
-        try {
             final Button btnAnswerPart1 = (Button) findViewById(R.id.btnPart1);
             btnAnswerPart1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -65,10 +63,6 @@ public class Menu extends AppCompatActivity {
                 }
             });
 
-        }catch (Exception e){
-            e.getMessage();
-            Toast.makeText(Menu.this,e.getMessage(), Toast.LENGTH_LONG).show();
-        }
             final Button btnPart2 = (Button) findViewById(R.id.btnPart2);
             btnPart2.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,7 +95,23 @@ public class Menu extends AppCompatActivity {
             btnPart4.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent AnswerPart4 = new Intent(Menu.this, AnswerPart4.class);
+                    AnswerPart4.putExtra("answerSheet", answerSheet);
+                    AnswerPart4.putExtra("ansKey", ansKey);
+                    AnswerPart4.putExtra("audios", audios);
+                    AnswerPart4.putExtra("indexTest", indexTest);
+                    bundle.putSerializable("questions", questions);
+                    AnswerPart4.putExtras(bundle);
+                    startActivity(AnswerPart4);
+                }
+            });
 
+            final Button btnTest = (Button)findViewById(R.id.btnTest);
+            btnTest.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent test = new Intent(Menu.this, MainActivity.class);
+                    startActivity(test);
                 }
             });
 

@@ -14,9 +14,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
-public class AnswerPart3 extends AppCompatActivity {
+public class AnswerPart4 extends AppCompatActivity {
 
     private RadioButton a1,b1,c1,d1;
     private RadioButton a2,b2,c2,d2;
@@ -149,7 +148,7 @@ public class AnswerPart3 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_answer_part3);
+        setContentView(R.layout.activity_answer_part4);
 
         btnPlay = (Button) findViewById(R.id.btnStart);
         btnMenu = (Button) findViewById(R.id.btnMenu);
@@ -218,7 +217,7 @@ public class AnswerPart3 extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(curans<67){
+                if(curans<97){
                     curans+=3;
                     cur_audio++;
                     displayQuestion(a1,b1,c1,d1,txtquestion1,0);
@@ -233,7 +232,7 @@ public class AnswerPart3 extends AppCompatActivity {
         pre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(curans>40){
+                if(curans>70){
                     curans-=3;
                     cur_audio--;
                     displayQuestion(a1,b1,c1,d1,txtquestion1,0);
@@ -245,8 +244,8 @@ public class AnswerPart3 extends AppCompatActivity {
             }
         });
 
-        curans = 40;
-        cur_audio = 40;
+        curans = 70;
+        cur_audio = 50;
         displayQuestion(a1,b1,c1,d1,txtquestion1,0);
         displayQuestion(a2,b2,c2,d2,txtquestion2,1);
         displayQuestion(a3,b3,c3,d3,txtquestion3,2);
@@ -257,7 +256,7 @@ public class AnswerPart3 extends AppCompatActivity {
             public void onClick(View v) {
                 mediaPlayer.release();
                 m_Handler.removeCallbacks(updateSongTime);
-                Intent menu = new Intent(AnswerPart3.this,Menu.class);
+                Intent menu = new Intent(AnswerPart4.this,Menu.class);
                 menu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 finish();
             }
