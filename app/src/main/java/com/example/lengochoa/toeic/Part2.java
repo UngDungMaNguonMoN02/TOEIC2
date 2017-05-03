@@ -1,6 +1,7 @@
 package com.example.lengochoa.toeic;
 
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.content.Intent;
 import android.os.CountDownTimer;
@@ -40,6 +41,8 @@ public class Part2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part2);
 
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Fun Smiles.ttf");
+
         Intent intent = getIntent();
         answerSheet = intent.getStringArrayExtra("answerSheet");
         remainingTime = intent.getLongExtra("remainingTime",1L);
@@ -49,6 +52,7 @@ public class Part2 extends AppCompatActivity {
         questions = (ArrayList<Question>) bundle.getSerializable("questions");
 
         txtTimer = (TextView)findViewById(R.id.txtTimer);
+        txtTimer.setTypeface(custom_font);
         txtQuestion = (TextView)findViewById(R.id.txtquestion);
         RadioButton a = (RadioButton)findViewById(R.id.rdba);
         a.setOnClickListener(new View.OnClickListener() {
@@ -92,12 +96,12 @@ public class Part2 extends AppCompatActivity {
                 mediaPlayerPart2.release();
                 Random rd = new Random();
                 int n ;
-                for(int i = 10; i < 40; i++){
-                    n = rd.nextInt(2);
-                    if(n==0) answerSheet[i]="A";
-                    else if(n==1) answerSheet[i]="B";
-                    else answerSheet[i]="C";
-                }
+//                for(int i = 10; i < 40; i++){
+//                    n = rd.nextInt(2);
+//                    if(n==0) answerSheet[i]="A";
+//                    else if(n==1) answerSheet[i]="B";
+//                    else answerSheet[i]="C";
+//                }
                 Intent part3 = new Intent(Part2.this,Part3.class);
                 part3.putExtra("answerSheet",answerSheet);
                 part3.putExtra("remainingTime",remainingTime);

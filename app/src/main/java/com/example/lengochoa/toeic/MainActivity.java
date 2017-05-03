@@ -3,10 +3,13 @@ package com.example.lengochoa.toeic;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+
+import org.w3c.dom.Text;
 
 import java.util.*;
 
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String, List<String>> expandableListDetail;
     private int idxTest;
     private ArrayList<Question> questions;
+    private TextView txtStrong;
 
     private String dbname = "toeic1.sqlite";
 
@@ -50,12 +54,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         idxTest = -1;
-
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
         expandableListDetail = ExpandableListDataPump.getData("Chọn test để kiểm tra ...");
         expandableListTitle = new ArrayList<>(expandableListDetail.keySet());
         expandableListAdapter = new CustomExpandableListAdapter(this, expandableListTitle, expandableListDetail);
         expandableListView.setAdapter(expandableListAdapter);
+
+        txtStrong = (TextView)findViewById(R.id.txtStrong);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/KBZipaDeeDooDah.ttf");
+        txtStrong.setTypeface(custom_font);
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override

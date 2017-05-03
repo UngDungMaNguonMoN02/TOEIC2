@@ -2,6 +2,7 @@ package com.example.lengochoa.toeic;
 
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class Part1 extends AppCompatActivity{
     private ArrayList<Question> questions;
     private MediaPlayer mediaPlayerPart1;
     private Button nextPart;
+    private RadioButton a,b,c,d;
 
     private String ConvertTime(int s){
         int m = s/60;
@@ -48,6 +50,7 @@ public class Part1 extends AppCompatActivity{
         }
 
         txtnoq = (TextView)findViewById(R.id.txtnoq);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Fun Smiles.ttf");
         Intent intent = getIntent();
         indexTest = intent.getIntExtra("indexTest",1);
 //        remainingTime = intent.getLongExtra("remainingTime",1L);
@@ -59,7 +62,7 @@ public class Part1 extends AppCompatActivity{
             audios = assetManager.list("audio"+indexTest);
         } catch (Exception ex){}
 
-        RadioButton a = (RadioButton)findViewById(R.id.rdba);
+        a = (RadioButton)findViewById(R.id.rdba);
         a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +70,7 @@ public class Part1 extends AppCompatActivity{
                 answerSheet[currentIndex] = currentAns;
             }
         });
-        RadioButton b = (RadioButton)findViewById(R.id.rdbb);
+        b = (RadioButton)findViewById(R.id.rdbb);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +78,7 @@ public class Part1 extends AppCompatActivity{
                 answerSheet[currentIndex] = currentAns;
             }
         });
-        RadioButton c = (RadioButton)findViewById(R.id.rdbc);
+        c = (RadioButton)findViewById(R.id.rdbc);
         c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +86,7 @@ public class Part1 extends AppCompatActivity{
                 answerSheet[currentIndex] = currentAns;
             }
         });
-        RadioButton d = (RadioButton)findViewById(R.id.rdbd);
+        d = (RadioButton)findViewById(R.id.rdbd);
         d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +96,7 @@ public class Part1 extends AppCompatActivity{
         });
 
         txtTimer = (TextView)findViewById(R.id.txtTimer);
+        txtTimer.setTypeface(custom_font);
         txtnoq = (TextView)findViewById(R.id.txtnoq);
         txtnoq.setText("1/10");
 
@@ -106,7 +110,7 @@ public class Part1 extends AppCompatActivity{
 
         final CounterForTest timer = new CounterForTest(remainingTime,1000);
         timer.start();
-        final CounterPart1 part1 = new CounterPart1(227000,1000);//cai ontick nay van hoat dong
+        final CounterPart1 part1 = new CounterPart1(227000,1000);
         part1.start();
 
         nextPart = (Button)findViewById(R.id.btnNextPart);
@@ -116,14 +120,14 @@ public class Part1 extends AppCompatActivity{
                 timer.cancel();
                 part1.cancel();
                 mediaPlayerPart1.release();
-                for(int i = 0 ; i < 10 ;i++){
-                    Random random = new Random();
-                    int n = random.nextInt(3);
-                    if(n==0) answerSheet[i]="A";
-                    else if(n==1) answerSheet[i]="B";
-                    else if(n==2) answerSheet[i]="C";
-                    else answerSheet[i]="D";
-                }
+//                for(int i = 0 ; i < 10 ;i++){
+//                    Random random = new Random();
+//                    int n = random.nextInt(3);
+//                    if(n==0) answerSheet[i]="A";
+//                    else if(n==1) answerSheet[i]="B";
+//                    else if(n==2) answerSheet[i]="C";
+//                    else answerSheet[i]="D";
+//                }
                 Intent part2 = new Intent(Part1.this,Part2.class);
                 part2.putExtra("answerSheet",answerSheet);
                 part2.putExtra("remainingTime",remainingTime);
@@ -166,7 +170,7 @@ public class Part1 extends AppCompatActivity{
                 try{
                     currentIndex++;
                     txtnoq.setText((currentIndex+1)+"/10");
-                    answerSheet[currentIndex-1]=currentAns;
+//                    answerSheet[currentIndex-1]=currentAns;
                     showImage(currentIndex+1);
                     mediaPlayerPart1.release();
                     playAudio(currentIndex);
@@ -197,6 +201,10 @@ public class Part1 extends AppCompatActivity{
         in.setDuration(1000);
         imgSwitcher.startAnimation(in);
         imgSwitcher.setBackgroundResource(getResIdByName("t"+indexTest+"img"+imgIndex));
+        a.setChecked(false);
+        b.setChecked(false);
+        c.setChecked(false);
+        d.setChecked(false);
     }
 
     public int getResIdByName(String resName)  {

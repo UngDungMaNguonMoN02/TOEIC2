@@ -174,14 +174,14 @@ public class Part4 extends AppCompatActivity {
                 timer.cancel();
                 nextQuestion.cancel();
                 mediaPlayerPart4.release();
-                for(int i = 70 ; i < 100 ; i++){
-                    Random random = new Random();
-                    int n = random.nextInt(3);
-                    if(n==0) answerSheet[i]="A";
-                    else if(n==1) answerSheet[i]="B";
-                    else if(n==2) answerSheet[i]="C";
-                    else answerSheet[i]="D";
-                }
+//                for(int i = 70 ; i < 100 ; i++){
+//                    Random random = new Random();
+//                    int n = random.nextInt(3);
+//                    if(n==0) answerSheet[i]="A";
+//                    else if(n==1) answerSheet[i]="B";
+//                    else if(n==2) answerSheet[i]="C";
+//                    else answerSheet[i]="D";
+//                }
                 Intent menu = new Intent(Part4.this,Menu.class);
                 menu.putExtra("answerSheet",answerSheet);
                 menu.putExtra("audios",audios);

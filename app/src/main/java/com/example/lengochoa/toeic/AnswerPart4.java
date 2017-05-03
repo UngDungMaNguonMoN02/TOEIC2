@@ -64,7 +64,11 @@ public class AnswerPart4 extends AppCompatActivity {
             case "B": ((RadioButton)b).setChecked(true);break;
             case "C": ((RadioButton)c).setChecked(true);break;
             case "D": ((RadioButton)d).setChecked(true);break;
-            default:break;
+            default:
+                ((RadioButton)a).setChecked(false);
+                ((RadioButton)b).setChecked(false);
+                ((RadioButton)c).setChecked(false);
+                ((RadioButton)d).setChecked(false);break;
         }
 
         if(!answerSheet[curans+offset].equals(keys[curans+offset])){
@@ -156,6 +160,7 @@ public class AnswerPart4 extends AppCompatActivity {
         txtquestion1 = (TextView)findViewById(R.id.txtquestion1);
         txtquestion2 = (TextView)findViewById(R.id.txtquestion2);
         txtquestion3 = (TextView)findViewById(R.id.txtquestion3);
+
         a1 = (RadioButton)findViewById(R.id.rdba1);
         b1 = (RadioButton)findViewById(R.id.rdbb1);
         c1 = (RadioButton)findViewById(R.id.rdbc1);
@@ -178,8 +183,6 @@ public class AnswerPart4 extends AppCompatActivity {
         indexTest = intent.getIntExtra("indexTest",1);
         Bundle bundle = getIntent().getExtras();
         questions = (ArrayList<Question>)bundle.getSerializable("questions");
-
-
         seekbar = (SeekBar)findViewById(R.id.seekBar);
 
         final Runnable updateSongTime = new Runnable() {

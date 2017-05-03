@@ -3,6 +3,7 @@ package com.example.lengochoa.toeic;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +34,7 @@ public class Part3 extends AppCompatActivity {
     private int indexTest;
     private ArrayList<Question> questions;
     private Button nextPart;
-
+    private Typeface typeface;
     private String ConvertTime(int s){
         int m = s/60;
         int sec = s%60;
@@ -44,6 +45,9 @@ public class Part3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_part3);
+
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Fun Smiles.ttf");
+        typeface = Typeface.createFromAsset(getAssets(), "fonts/Sweet Sensations Personal Use.ttf");
 
         a1=(RadioButton)findViewById(R.id.rdba1);
         a1.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +152,7 @@ public class Part3 extends AppCompatActivity {
         txtQ2 = (TextView)findViewById(R.id.txtquestion2);
         txtQ3 = (TextView)findViewById(R.id.txtquestion3);
         txtTimer = (TextView)findViewById(R.id.txtTimer);
+        txtTimer.setTypeface(custom_font);
 
         Intent intent = getIntent();
         remainingTime = intent.getLongExtra("remaingTime",1L);
@@ -156,7 +161,6 @@ public class Part3 extends AppCompatActivity {
         indexTest = intent.getIntExtra("indexTest",1);
         Bundle bundle = getIntent().getExtras();
         questions = (ArrayList<Question>) bundle.getSerializable("questions");
-
 
         final CounterForTest timer = new CounterForTest(1880000,1000);
         timer.start();
@@ -175,14 +179,14 @@ public class Part3 extends AppCompatActivity {
                 timer.cancel();
                 nextQuestion.cancel();
                 mediaPlayerPart3.release();
-                for(int i = 40; i < 70; i++){
-                    Random random = new Random();
-                    int n = random.nextInt(3);
-                    if(n==0) answerSheet[i]="A";
-                    else if(n==1) answerSheet[i]="B";
-                    else if(n==2) answerSheet[i]="C";
-                    else answerSheet[i]="D";
-                }
+//                for(int i = 40; i < 70; i++){
+//                    Random random = new Random();
+//                    int n = random.nextInt(3);
+//                    if(n==0) answerSheet[i]="A";
+//                    else if(n==1) answerSheet[i]="B";
+//                    else if(n==2) answerSheet[i]="C";
+//                    else answerSheet[i]="D";
+//                }
                 Intent part4 = new Intent(Part3.this,Part4.class);
                 part4.putExtra("answerSheet",answerSheet);
                 part4.putExtra("remainingTime",remainingTime);
@@ -255,26 +259,30 @@ public class Part3 extends AppCompatActivity {
 
     private void displayQuestion(int questionIndex){
         try{
-        txtQ1.setText((questionIndex+1) + ". " + questions.get(questionIndex).getContent());
-        String[] temp = questions.get(questionIndex).getAnswer();
-        a1.setText(temp[0]);
-        b1.setText(temp[1]);
-        c1.setText(temp[2]);
-        d1.setText(temp[3]);
+            txtQ1.setText((questionIndex+1) + ". " + questions.get(questionIndex).getContent());
+            txtQ1.setTypeface(typeface);
+            String[] temp = questions.get(questionIndex).getAnswer();
+            a1.setText(temp[0]);
+            b1.setText(temp[1]);
+            c1.setText(temp[2]);
+            d1.setText(temp[3]);
 
-        txtQ2.setText((questionIndex+2) + ". " + questions.get(questionIndex+1).getContent());
-        temp = questions.get(questionIndex+1).getAnswer();
-        a2.setText(temp[0]);
-        b2.setText(temp[1]);
-        c2.setText(temp[2]);
-        d2.setText(temp[3]);
+            txtQ2.setText((questionIndex+2) + ". " + questions.get(questionIndex+1).getContent());
+            txtQ2.setTypeface(typeface);
+            temp = questions.get(questionIndex+1).getAnswer();
+            a2.setText(temp[0]);
+            b2.setText(temp[1]);
+            c2.setText(temp[2]);
+            d2.setText(temp[3]);
 
-        txtQ3.setText((questionIndex+3) + ". " + questions.get(questionIndex+2).getContent());
-        temp = questions.get(questionIndex+2).getAnswer();
-        a3.setText(temp[0]);
-        b3.setText(temp[1]);
-        c3.setText(temp[2]);
-        d3.setText(temp[3]);}
+            txtQ3.setText((questionIndex+3) + ". " + questions.get(questionIndex+2).getContent());
+            txtQ3.setTypeface(typeface);
+            temp = questions.get(questionIndex+2).getAnswer();
+            a3.setText(temp[0]);
+            b3.setText(temp[1]);
+            c3.setText(temp[2]);
+            d3.setText(temp[3]);
+        }
         catch (Exception e){
             Toast.makeText(
                     getApplicationContext(),

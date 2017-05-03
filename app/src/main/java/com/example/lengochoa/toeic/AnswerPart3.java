@@ -65,7 +65,11 @@ public class AnswerPart3 extends AppCompatActivity {
             case "B": ((RadioButton)b).setChecked(true);break;
             case "C": ((RadioButton)c).setChecked(true);break;
             case "D": ((RadioButton)d).setChecked(true);break;
-            default:break;
+            default:
+                ((RadioButton)a).setChecked(false);
+                ((RadioButton)b).setChecked(false);
+                ((RadioButton)c).setChecked(false);
+                ((RadioButton)d).setChecked(false);break;
         }
 
         if(!answerSheet[curans+offset].equals(keys[curans+offset])){

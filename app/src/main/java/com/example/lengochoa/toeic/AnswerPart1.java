@@ -66,7 +66,12 @@ public class AnswerPart1 extends AppCompatActivity {
             case "B": b.setChecked(true);break;
             case "C": c.setChecked(true);break;
             case "D": d.setChecked(true);break;
-            default:break;
+            default:
+                a.setChecked(false);
+                b.setChecked(false);
+                c.setChecked(false);
+                d.setChecked(false);
+                break;
         }
 
         if(!answerSheet[curans].equals(keys[curans])){
